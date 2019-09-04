@@ -1,22 +1,22 @@
-import React from "react";
+import React from "react"
 
 const BotSpecs = props => {
-  let { bot } = props;
+  let { bot } = props
 
-  let botType;
+  let botType
 
   switch (bot.bot_class) {
     case "Assault":
-      botType = <i className="icon large circular military" />;
-      break;
+      botType = <i className="icon large circular military" />
+      break
     case "Defender":
-      botType = <i className="icon large circular shield" />;
-      break;
+      botType = <i className="icon large circular shield" />
+      break
     case "Support":
-      botType = <i className="icon large circular ambulance" />;
-      break;
+      botType = <i className="icon large circular ambulance" />
+      break
     default:
-      botType = <div />;
+      botType = <div />
   }
 
   return (
@@ -58,21 +58,12 @@ const BotSpecs = props => {
                 </div>
               </div>
             </div>
-            <button
-              className="ui button fluid"
-              onClick={() =>
-                console.log('connect this to a function that shows all bots')
-              }
-            >
+            <button className="ui button fluid" onClick={props.backClicked}>
               Go Back
             </button>
             <button
               className="ui button fluid"
-              onClick={() =>
-                console.log(
-                  "connect this to a function that adds this bot to your bot army list"
-                )
-              }
+              onClick={e => props.enlistClicked(e, bot)}
             >
               Enlist
             </button>
@@ -80,8 +71,7 @@ const BotSpecs = props => {
         </div>
       </div>
     </div>
-  );
+  )
+}
 
-};
-
-export default BotSpecs;
+export default BotSpecs
