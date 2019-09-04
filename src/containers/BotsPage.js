@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from "react";
 import YourBotArmy from './YourBotArmy';
 import BotCollection from './BotCollection';
+import BotSpecs from "../components/BotSpecs";
 
 const API = "https://bot-battler-api.herokuapp.com/api/v1/bots"
 
 class BotsPage extends Component {
   
-  state = { bots: [], botArmy: [] }
+  state = { bots: [], botArmy: [], specBot: {}, clicked: true }
 
   componentDidMount(){
     fetch(API)
@@ -26,12 +27,23 @@ class BotsPage extends Component {
     this.setState({ botArmy: botArmyArray });
   }
 
+  displaySpecs = (botObj) => {
+    this.setState({ clicked: !this.state.clicked })
+    this.setState({ specBot: botObj})
+  }
+
+  goBackButton = () => {
+    this.setState({ specBot: {}})
+    this.setState({ clicked: !this.state.clicked })
+  }
 
   render() {
+    const isClicked = this.state.clicked;
     return (
       <Fragment>
         <YourBotArmy botArmy={this.state.botArmy} clickHandler={this.removeFromBotArmy} />
-        <BotCollection bots={this.state.bots} clickHandler={this.addToBotArmy} />
+        {isClicked ? (<BotCollection bots={this.state.bots} clickHandler={this.displaySpecs} />) 
+        : (<BotSpecs bot={this.state.specBot} goBackButton={this.goBackButton} addToArmyClick={this.addToBotArmy}/>)}
       </Fragment>
     );
   }

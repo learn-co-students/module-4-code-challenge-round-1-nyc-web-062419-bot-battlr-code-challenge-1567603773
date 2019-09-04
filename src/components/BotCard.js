@@ -4,20 +4,20 @@ class BotCard extends Component {
 
   render(){
     
-    const { 
-      id,
-      name,
-      health, 
-      damage, 
-      armor, 
-      bot_class, 
-      catchphrase, 
-      avatar_url 
-    } = this.props.bot;
-
-    const clickAction = () => this.props.whenClicked(this.props.bot)
+  const { 
+    id,
+    name,
+    health, 
+    damage, 
+    armor, 
+    bot_class, 
+    catchphrase, 
+    avatar_url 
+  } = this.props.bot;
   
-    let botType;
+  const clickAction = () => this.props.whenClicked(this.props.bot)
+
+  let botType;
 
   switch (bot_class) {
     case "Assault":
