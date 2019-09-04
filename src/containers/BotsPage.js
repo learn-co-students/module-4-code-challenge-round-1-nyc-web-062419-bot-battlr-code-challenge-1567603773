@@ -17,28 +17,31 @@ class BotsPage extends React.Component {
 	  }))
   }
 
-  clickHandler=(event, obj)=>{
-    console.log("CLICKED", event.target, obj)
-    if (!this.state.botArmyArray.includes(obj)) {
-      let newArray = [obj, ...this.state.botArmyArray]
-      this.setState({
-        botArmyArray: newArray,
-        botCollectionArray: this.state.botCollectionArray.filter(item=>item !== obj)
-      })
-    } else {
-      let otherArray = [obj, ...this.state.botCollectionArray]
-      this.setState({
-        botArmyArray: this.state.botArmyArray.filter(item => item !== obj),
-        botCollectionArray: otherArray
-      })
-    }
-  }
+  /// working woo!
 
-  render() {
-    return (
-      <div>
-        <YourBotArmy botArmyArray={this.state.botArmyArray} clickHandler={this.clickHandler}/>
-        <BotCollection botCollectionArray={this.state.botCollectionArray} clickHandler={this.clickHandler}/>
+  // clickHandler=(event, obj)=>{
+  //   console.log("CLICKED", event.target, obj)
+  //   if (!this.state.botArmyArray.includes(obj)) {
+  //     let newArray = [obj, ...this.state.botArmyArray]
+  //     this.setState({
+  //       botArmyArray: newArray,
+  //       botCollectionArray: this.state.botCollectionArray.filter(item=>item !== obj)
+  //     })
+  //   } else {
+  //     let otherArray = [obj, ...this.state.botCollectionArray]
+  //     this.setState({
+  //       botArmyArray: this.state.botArmyArray.filter(item => item !== obj),
+  //       botCollectionArray: otherArray
+  //     })
+  //   }
+  // }
+
+    
+    render() {
+      return (
+        <div>
+        <YourBotArmy botArmyArray={this.state.botArmyArray}/>
+        <BotCollection botCollectionArray={this.state.botCollectionArray}/>
       </div>
     );
   }
