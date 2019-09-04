@@ -14,7 +14,8 @@ class YourBotArmy extends React.Component {
               .filter(b => b.enlisted === true)
               .map(b => (
                 <BotCard
-                  setEnlistmentStatus={setEnlistmentStatus}
+                  // setEnlistmentStatus={setEnlistmentStatus}
+                  clickEvent={setEnlistmentStatus}
                   key={b.name}
                   bot={b}
                 />

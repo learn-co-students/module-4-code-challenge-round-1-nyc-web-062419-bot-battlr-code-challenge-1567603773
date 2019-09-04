@@ -15,16 +15,16 @@ class BotsPage extends React.Component {
       );
   }
 
-  enlistBotToArmy = id => {
+  enlistBotToArmy = bot => {
     const bots = this.state.bots.map(b =>
-      b.id === id ? { ...b, enlisted: true } : b
+      b.id === bot.id ? { ...b, enlisted: true } : b
     );
     this.setState({ bots });
   };
 
-  deEnlistBotFromArmy = id => {
+  deEnlistBotFromArmy = bot => {
     const bots = this.state.bots.map(b =>
-      b.id === id ? { ...b, enlisted: false } : b
+      b.id === bot.id ? { ...b, enlisted: false } : b
     );
     this.setState({ bots });
   };

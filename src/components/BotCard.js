@@ -1,9 +1,9 @@
 import React from "react";
 
 const BotCard = props => {
-  const { bot, setEnlistmentStatus } = props;
+  const { bot, clickEvent } = props;
 
-  const handleClick = () => setEnlistmentStatus(bot.id);
+  const handleClick = () => clickEvent(bot);
 
   let botType;
 
