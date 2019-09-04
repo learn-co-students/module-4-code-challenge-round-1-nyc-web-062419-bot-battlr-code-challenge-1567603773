@@ -2,10 +2,17 @@ import React from "react"
 import BotCollection from "./BotCollection"
 import YourBotArmy from "./YourBotArmy"
 import BotSpecs from "../components/BotSpecs"
+import BotSearch from "../components/BotSearch"
 
 class BotsPage extends React.Component {
   //start here with your code for step one
-  state = { allBots: [], yourBots: [], toggleSpecs: false, theOneBot: "" }
+  state = {
+    allBots: [],
+    yourBots: [],
+    toggleSpecs: false,
+    theOneBot: "",
+    searchText: ""
+  }
 
   componentDidMount() {
     fetch("https://bot-battler-api.herokuapp.com/api/v1/bots")
@@ -40,10 +47,22 @@ class BotsPage extends React.Component {
     this.botSpecsBackClick()
   }
 
+  botSearchChange = e => {
+    this.setState({ searchText: e.target.value })
+  }
+
   render() {
+    const matchingBots = this.state.allBots.filter(bot =>
+      bot.name.toLowerCase().includes(this.state.searchText.toLowerCase())
+    )
+
     return (
       <div>
-        <YourBotArmy yourBots={this.state.yourBots} />
+        <YourBotArmy
+          yourBots={this.state.yourBots}
+          botCollectionClick={() => {}}
+        />
+
         {/* Control the toggle of the BotSpecs and BotCollection */}
         {this.state.toggleSpecs ? (
           <BotSpecs
@@ -52,10 +71,16 @@ class BotsPage extends React.Component {
             enlistClicked={this.botSpecsEnlistClick}
           />
         ) : (
-          <BotCollection
-            allBots={this.state.allBots}
-            botCollectionClick={this.botCollectionClick}
-          />
+          <div>
+            <BotSearch
+              input={this.state.searchText}
+              changed={this.botSearchChange}
+            />
+            <BotCollection
+              allBots={matchingBots}
+              botCollectionClick={this.botCollectionClick}
+            />
+          </div>
         )}
       </div>
     )
