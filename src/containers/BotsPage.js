@@ -11,7 +11,8 @@ class BotsPage extends React.Component {
     yourBots: [],
     toggleSpecs: false,
     theOneBot: "",
-    searchText: ""
+    searchText: "",
+    filterClass: "Default"
   }
 
   componentDidMount() {
@@ -51,10 +52,27 @@ class BotsPage extends React.Component {
     this.setState({ searchText: e.target.value })
   }
 
+  botDropdownChange = e => {
+    this.setState({ filterClass: e.target.value })
+  }
+
+  sortNFilter = arr => {
+    if (this.state.filterClass !== "Default") {
+      arr = arr.filter(
+        bot =>
+          bot.bot_class === this.state.filterClass &&
+          bot.name.toLowerCase().includes(this.state.searchText.toLowerCase())
+      )
+    } else {
+      arr = arr.filter(bot =>
+        bot.name.toLowerCase().includes(this.state.searchText.toLowerCase())
+      )
+    }
+    return arr
+  }
+
   render() {
-    const matchingBots = this.state.allBots.filter(bot =>
-      bot.name.toLowerCase().includes(this.state.searchText.toLowerCase())
-    )
+    let matchingBots = this.sortNFilter(this.state.allBots)
 
     return (
       <div>
@@ -74,7 +92,9 @@ class BotsPage extends React.Component {
           <div>
             <BotSearch
               input={this.state.searchText}
+              dropdownVal={this.state.filterClass}
               changed={this.botSearchChange}
+              dropChange={this.botDropdownChange}
             />
             <BotCollection
               allBots={matchingBots}

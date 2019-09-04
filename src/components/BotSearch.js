@@ -11,6 +11,16 @@ export default class BotSearch extends React.Component {
           value={this.props.input}
           onChange={this.props.changed}
         />
+        <select
+          style={{ margin: "20px" }}
+          onChange={this.props.dropChange}
+          value={this.props.dropdownVal}
+        >
+          <option value="Default">Filter by Bot Class</option>
+          <option value="Assault">Assault</option>
+          <option value="Defender">Defender</option>
+          <option value="Support">Support</option>
+        </select>
         <br />
         <br />
       </div>
