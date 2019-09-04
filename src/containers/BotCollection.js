@@ -15,7 +15,7 @@ class BotCollection extends React.Component {
 
   render(){
 
-	const renderBot = bot => <BotCard key={bot.id} bot_class={bot.bot_class} id={bot.id} avatar_url={bot.avatar_url} name={bot.name} catchphrase={bot.catchphrase} health={bot.health} damage={bot.damage} armor={bot.armor} clickHandle={this.props.addOwnership(bot)}/>
+	const renderBot = bot => <BotCard key={bot.id} bot_class={bot.bot_class} id={bot.id} avatar_url={bot.avatar_url} name={bot.name} catchphrase={bot.catchphrase} health={bot.health} damage={bot.damage} armor={bot.armor} clickHandle={this.props.viewStats(bot)}/>
 
   	return (
   	  <div className="ui four column grid">
