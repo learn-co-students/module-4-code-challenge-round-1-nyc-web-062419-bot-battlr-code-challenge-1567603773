@@ -2,6 +2,7 @@ import React from "react";
 import BotCollection from "./BotCollection";
 import YourBotArmy from "./YourBotArmy";
 import BotSpecs from "../components/BotSpecs";
+import Nav from "./Nav";
 
 class BotsPage extends React.Component {
   //start here with your code for step one
@@ -9,7 +10,9 @@ class BotsPage extends React.Component {
     bots: [],
     army: [],
     stats: false,
-    bot: []
+    bot: [],
+    search: "",
+    sort: ""
   };
 
   componentDidMount() {
@@ -31,20 +34,51 @@ class BotsPage extends React.Component {
 
   addBotToArmy = bot => {
     if (!this.state.army.includes(bot)) {
-      this.setState({ army: [...this.state.army, this.state.bot] });
+      this.setState({ army: [...this.state.army, bot] });
+    }
+    if (this.state.stats) {
       this.setState({ bot: [] });
       this.viewStats();
     }
+  };
+
+  sortHandler = e => {
+    let hello = this.state.bots.sort((a, b) => a.e > b.e);
+    console.log(hello);
   };
 
   viewStats = () => {
     this.setState({ stats: !this.state.stats });
   };
 
+  searchHandler = e => {
+    this.setState({ search: e });
+  };
+
+  randomizer = () => {
+    this.addBotToArmy(
+      this.state.bots[Math.ceil(Math.random() * this.state.bots.length)]
+    );
+  };
+
   render() {
+    let filteredBots = this.state.bots.filter(
+      bot => bot.name.toLowerCase() === this.state.search.toLowerCase()
+    );
+    let filteredArmy = this.state.army.filter(
+      bot => bot.name.toLowerCase() === this.state.search.toLowerCase()
+    );
     return (
       <div>
-        <YourBotArmy army={this.state.army} click={this.removeBotFromArmy} />
+        <Nav
+          search={this.searchHandler}
+          click={this.randomizer}
+          sort={this.sortHandler}
+        />
+        <YourBotArmy
+          army={filteredArmy.length > 0 ? filteredArmy : this.state.army}
+          click={this.removeBotFromArmy}
+        />
         {this.state.stats ? (
           <BotSpecs
             bot={this.state.bot}
@@ -52,7 +86,10 @@ class BotsPage extends React.Component {
             goBack={this.viewStats}
           />
         ) : (
-          <BotCollection bots={this.state.bots} click={this.viewBot} />
+          <BotCollection
+            bots={filteredBots.length > 0 ? filteredBots : this.state.bots}
+            click={this.viewBot}
+          />
         )}
       </div>
     );
