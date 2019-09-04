@@ -1,9 +1,17 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 
 class BotSpecs extends Component {
 
+  static propTypes = {
+    bot: PropTypes.object.isRequired,
+    addToArmyClick: PropTypes.func.isRequired,
+    goBackButton: PropTypes.func.isRequired
+  }
+
   render(){
-    const { 
+
+    const {
       id,
       name,
       health, 

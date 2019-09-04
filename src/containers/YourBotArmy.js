@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import BotCard from "../components/BotCard";
+import PropTypes from 'prop-types';
 
 class YourBotArmy extends Component {
+
+  static propTypes = {
+    botArmy: PropTypes.array.isRequired,
+    clickHandler: PropTypes.func.isRequired
+  }
 
   render(){
 
