@@ -21,6 +21,7 @@ export default class BotSearch extends React.Component {
           <option value="Defender">Defender</option>
           <option value="Support">Support</option>
         </select>
+        <button onClick={this.props.shakeEm}>Press me if you dare</button>
         <br />
         <br />
       </div>
