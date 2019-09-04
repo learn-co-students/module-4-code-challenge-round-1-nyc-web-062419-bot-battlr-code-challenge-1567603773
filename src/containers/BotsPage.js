@@ -2,10 +2,13 @@ import React from "react";
 import YourBotArmy from './YourBotArmy'
 import BotCollection from './BotCollection'
 import { stat } from "fs";
+import BotSpecs from "../components/BotSpecs";
 
 class BotsPage extends React.Component {
   state = {
-    botsArray: []
+    botsArray: [],
+    selectedBot: {},
+    botInSpec: false
   }
 
   componentDidMount() {
@@ -17,20 +20,37 @@ class BotsPage extends React.Component {
   }
 
   onBotClick = (botObj) => {
+    console.log("bot click", botObj)
+    this.setState({
+      selectedBot: botObj,
+      botInSpec: true
+    })
+  }
+
+  onCancel = () => {
+    this.setState({
+      botInSpec: false
+    })
+  }
+
+  onEnlist = (botObj) => {
     const newArray = this.state.botsArray.map(bot => {
       bot.id === botObj.id ? bot.inArmy = !bot.inArmy : bot
       return bot
     })
     this.setState({
-      botsArray: newArray
-    }, () => console.log(this.state.botsArray))
+      botsArray: newArray,
+      botInSpec:false
+    })
   }
+
   render() {
     const arrayOfBotsInArmy = this.state.botsArray.filter(bot => bot.inArmy)
     console.log(arrayOfBotsInArmy)
     return (
       <div>
         <YourBotArmy botsArray={arrayOfBotsInArmy} />
+        {this.state.botInSpec ? <BotSpecs bot={this.state.selectedBot} onCancel={this.onCancel} onEnlist={this.onEnlist} /> : null }
         <BotCollection botsArray={this.state.botsArray} onBotClick={this.onBotClick} />
       </div>
     );
