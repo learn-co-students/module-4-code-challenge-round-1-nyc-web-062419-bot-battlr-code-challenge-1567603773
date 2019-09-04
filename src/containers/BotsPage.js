@@ -3,6 +3,7 @@ import BotCollection from "./BotCollection"
 import YourBotArmy from "./YourBotArmy"
 import BotSpecs from "../components/BotSpecs"
 
+
 class BotsPage extends React.Component {
 
   state = {
@@ -36,12 +37,13 @@ class BotsPage extends React.Component {
     this.setState({yourBots: this.state.yourBots.filter(botObj => botObj !== bot)})
   }
 
+
   render() {
     return (
       <div>
         <YourBotArmy bots={this.state.yourBots} handleClick={this.removeFromArmy}/>
         {this.state.botSelected ? <BotSpecs bot={this.state.botSelected} addToArmy={this.addToArmy} viewList={this.viewList}/> :
-        <BotCollection bots={this.state.bots} handleClick={this.showSpecs}/>}
+          <BotCollection bots={this.state.bots} handleClick={this.showSpecs}/>}
       </div>
     );
   }
