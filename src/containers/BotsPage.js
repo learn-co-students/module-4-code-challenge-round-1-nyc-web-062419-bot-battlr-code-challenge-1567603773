@@ -6,7 +6,7 @@ import BotSpecs from "../components/BotSpecs";
 const API = "https://bot-battler-api.herokuapp.com/api/v1/bots"
 
 class BotsPage extends Component {
-  
+
   state = { bots: [], botArmy: [], specBot: {}, clicked: true }
 
   componentDidMount(){
@@ -29,11 +29,11 @@ class BotsPage extends Component {
 
   displaySpecs = (botObj) => {
     this.setState({ clicked: !this.state.clicked })
-    this.setState({ specBot: botObj})
+    this.setState({ specBot: botObj })
   }
 
   goBackButton = () => {
-    this.setState({ specBot: {}})
+    this.setState({ specBot: {} })
     this.setState({ clicked: !this.state.clicked })
   }
 
