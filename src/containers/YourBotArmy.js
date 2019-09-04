@@ -12,7 +12,26 @@ class YourBotArmy extends React.Component {
       <div className="ui segment inverted olive bot-army">
         <div className="ui five column grid">
           <div className="row bot-army-row">
-            {this.props.owned.map(bot=> renderBot(bot))}
+
+            <div style={{display:'flex', justifyContent:'space-evenly', width:'100%'}}>
+
+            <div style={{display:'flex', flexDirection:'column', alignItems:'center', width:'20vw'}}>
+            <h2>Assault</h2>
+            {this.props.owned.filter(bot => bot.bot_class === "Assault").map(bot=> renderBot(bot))}
+            </div>
+
+            <div style={{display:'flex', flexDirection:'column', alignItems:'center', width:'20vw'}}>
+            <h2>Defender</h2>
+            {this.props.owned.filter(bot => bot.bot_class === "Defender").map(bot=> renderBot(bot))}
+            </div>
+
+            <div style={{display:'flex', flexDirection:'column', alignItems:'center', width:'20vw'}}>
+            <h2>Support</h2>
+            {this.props.owned.filter(bot => bot.bot_class === "Support").map(bot=> renderBot(bot))}
+            </div>
+            
+            </div>
+            
           </div>
         </div>
       </div>

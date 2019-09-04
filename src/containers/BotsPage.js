@@ -7,6 +7,8 @@ class BotsPage extends React.Component {
   //start here with your code for step one
   state={owned: [], showingSpecs: undefined}
 
+  // support, defender, Assault
+
   viewStats = bot =>  () => {
     this.setState({showingSpecs: bot})
   }
