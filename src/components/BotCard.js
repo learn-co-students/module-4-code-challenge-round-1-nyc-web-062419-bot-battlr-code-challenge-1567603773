@@ -1,11 +1,25 @@
-import React from "react";
+import React, { Component } from "react";
 
-const BotCard = props => {
-  const { bot } = props;
+class BotCard extends Component {
 
-  let botType;
+  render(){
+    
+    const { 
+      id,
+      name,
+      health, 
+      damage, 
+      armor, 
+      bot_class, 
+      catchphrase, 
+      avatar_url 
+    } = this.props.bot;
 
-  switch (bot.bot_class) {
+    const clickAction = () => this.props.whenClicked(this.props.bot)
+  
+    let botType;
+
+  switch (bot_class) {
     case "Assault":
       botType = <i className="icon military" />;
       break;
@@ -23,39 +37,41 @@ const BotCard = props => {
     <div className="ui column">
       <div
         className="ui card"
-        key={bot.id}
-        onClick={() => console.log("add code to connect event listener")}
+        key={id}
+        onClick={clickAction}
       >
         <div className="image">
-          <img alt="oh no!" src={bot.avatar_url} />
+          <img alt="oh no!" src={avatar_url} />
         </div>
         <div className="content">
           <div className="header">
-            {bot.name} {botType}
+            {name} {botType}
           </div>
 
           <div className="meta text-wrap">
-            <small>{bot.catchphrase}</small>
+            <small>{catchphrase}</small>
           </div>
         </div>
         <div className="extra content">
           <span>
             <i className="icon heartbeat" />
-            {bot.health}
+            {health}
           </span>
 
           <span>
             <i className="icon lightning" />
-            {bot.damage}
+            {damage}
           </span>
           <span>
             <i className="icon shield" />
-            {bot.armor}
+            {armor}
           </span>
         </div>
       </div>
     </div>
   );
+  }
+
 
 };
 
