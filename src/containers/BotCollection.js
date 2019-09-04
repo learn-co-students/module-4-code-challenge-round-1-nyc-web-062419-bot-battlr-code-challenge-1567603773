@@ -9,7 +9,7 @@ class BotCollection extends React.Component {
 		return (
 			<div className="ui four column grid">
 				<div className="row">
-					Collection of all bots
+					{/* Collection of all bots */}
 					{this.props.bots.map(bot => <BotCard key={"bot" + bot.id} bot={bot} handleClick={this.props.handleClick}/>)}
 				</div>
 			</div>

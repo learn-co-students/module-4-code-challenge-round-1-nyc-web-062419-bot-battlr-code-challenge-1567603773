@@ -1,12 +1,14 @@
 import React from "react";
 import BotCollection from "./BotCollection"
 import YourBotArmy from "./YourBotArmy"
+import BotSpecs from "../components/BotSpecs"
 
 class BotsPage extends React.Component {
 
   state = {
     bots: [],
-    yourBots: []
+    yourBots: [],
+    botSelected: null
   }
   
   componentDidMount(){
@@ -15,21 +17,30 @@ class BotsPage extends React.Component {
     .then(data => this.setState({bots: data}))
   }
 
-  handleClick = (e, bot) => {
-    if (!this.state.yourBots.includes(bot)){
+  showSpecs = (e, bot) => {
+    this.setState({botSelected: bot})
+  }
+
+  viewList = () => {
+    this.setState({botSelected: null})
+  }
+
+  addToArmy = (e,bot) => {
+      if (!this.state.yourBots.includes(bot)){
       this.setState({yourBots: [...this.state.yourBots, bot]}) 
     } 
   }
   
-  yourArmyClick = (e, bot) => {
+  removeFromArmy = (e, bot) => {
     this.setState({yourBots: this.state.yourBots.filter(botObj => botObj !== bot)})
   }
 
   render() {
     return (
       <div>
-        <YourBotArmy bots={this.state.yourBots} handleClick={this.yourArmyClick}/>
-        <BotCollection bots={this.state.bots} handleClick={this.handleClick}/>
+        <YourBotArmy bots={this.state.yourBots} handleClick={this.removeFromArmy}/>
+        {this.state.botSelected ? <BotSpecs bot={this.state.botSelected} addToArmy={this.addToArmy} viewList={this.viewList}/> :
+        <BotCollection bots={this.state.bots} handleClick={this.showSpecs}/>}
       </div>
     );
   }
