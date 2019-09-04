@@ -20,7 +20,6 @@ class BotsPage extends React.Component {
   }
 
   onBotClick = (botObj) => {
-    console.log("bot click", botObj)
     this.setState({
       selectedBot: botObj,
       botInSpec: true
@@ -46,10 +45,9 @@ class BotsPage extends React.Component {
 
   render() {
     const arrayOfBotsInArmy = this.state.botsArray.filter(bot => bot.inArmy)
-    console.log(arrayOfBotsInArmy)
     return (
       <div>
-        <YourBotArmy botsArray={arrayOfBotsInArmy} />
+        <YourBotArmy botsArray={arrayOfBotsInArmy} onEnlist={this.onEnlist}/>
         {this.state.botInSpec ? <BotSpecs bot={this.state.selectedBot} onCancel={this.onCancel} onEnlist={this.onEnlist} /> : null }
         <BotCollection botsArray={this.state.botsArray} onBotClick={this.onBotClick} />
       </div>
