@@ -19,16 +19,13 @@ class BotsPage extends React.Component {
   renderClick = (bot) => {
     if(!this.state.botsArmy.includes(bot)){
       let newArray = [...this.state.botsArmy, bot]
-      this.setState({botsArmy: newArray})
-
-    }
+      this.setState({botsArmy: newArray});
+      }
   }
 
   botSpecs = (bot) => {
-    this.setState({botSpec: bot})
+    this.setState({botSpec: bot});
     console.log("botttt")
-      
-     
 
   }
   removeBot = (bot) => {
@@ -37,6 +34,7 @@ class BotsPage extends React.Component {
       this.setState({botsArmy: newArray})
     }
   }
+  
   render() {
 
     return (
