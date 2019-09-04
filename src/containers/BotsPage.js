@@ -14,7 +14,10 @@ class BotsPage extends React.Component {
   }
 
   addOwnership = bot => () => {
-    if (!this.state.owned.find(b => b.id === bot.id)) {
+
+    console.log(this.state.owned.filter(b => b.bot_class === bot.bot_class))
+
+    if (!this.state.owned.find(b => b.id === bot.id) && this.state.owned.filter(b => b.bot_class === bot.bot_class).length < 2) {
       this.setState({owned: [...this.state.owned, bot]})
     }
     this.setState({showingSpecs: undefined})
