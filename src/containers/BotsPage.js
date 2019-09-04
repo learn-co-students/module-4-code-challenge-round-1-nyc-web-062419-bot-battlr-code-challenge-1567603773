@@ -27,7 +27,8 @@ class BotsPage extends React.Component {
 
   addToArmy = (e,bot) => {
       if (!this.state.yourBots.includes(bot)){
-      this.setState({yourBots: [...this.state.yourBots, bot]}) 
+      this.setState({yourBots: [...this.state.yourBots, bot],botSelected: null
+      }) 
     } 
   }
   
