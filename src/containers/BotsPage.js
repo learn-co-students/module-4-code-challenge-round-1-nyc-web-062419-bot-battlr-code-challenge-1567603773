@@ -1,11 +1,13 @@
 import React from "react";
 import BotCollection from "./BotCollection"
 import YourBotArmy from "./YourBotArmy";
+import BotSpecs from "../components/BotSpecs"
 
 class BotsPage extends React.Component {
   state = {
     botsArray: [],
-    botsArmy: []
+    botsArmy: [],
+    botSpec: []
   }
 
   componentDidMount() {
@@ -22,6 +24,13 @@ class BotsPage extends React.Component {
     }
   }
 
+  botSpecs = (bot) => {
+    this.setState({botSpec: bot})
+    console.log("botttt")
+      
+     
+
+  }
   removeBot = (bot) => {
     if(this.state.botsArmy.includes(bot)){
       let newArray = this.state.botsArmy.filter(botObj => bot !== botObj)
@@ -33,8 +42,8 @@ class BotsPage extends React.Component {
     return (
       <div>
         <YourBotArmy botsArmy={this.state.botsArmy} renderClick={this.removeBot} />
-
-        <BotCollection botsArray={this.state.botsArray} renderClick={this.renderClick}/>
+        <BotSpecs key={this.state.botSpec.id} bot={this.state.botSpec} renderSpecClick={this.renderClick}/>
+        <BotCollection botsArray={this.state.botsArray} renderClick={this.botSpecs} />
       </div>
     );
   }
